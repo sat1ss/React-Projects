@@ -1,39 +1,68 @@
 import { useEffect, useState } from "react";
-import { Modal } from "./Modal";
-import { TypeCard } from "./TypeCard";
+import { getFullPokedexNumber, getPokedexNumber } from "../utils";
+import TypeCard from "./TypeCard";
 
-export function PokeCard(props) {
-    const { selectedPokemon } = props
-    const {data, setData} = useState(null)
-    const {loading, setLoading} = useState(false)
+export default function PokeCard(props) {
+    const { selectedPokemon } = props;
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const { name, height, abilities, stats, types, moves, sprites } = data || {};
 
     useEffect(() => {
-        // if loading, exit logic
-        if (loading || !localStorage) { return }
-        // check if the pokemon is avalible in cache
-        // 1. define the casche
-        let cache = {}
-        if (localStorage.getItem('pokedex')) {
-            cache = JSON.parse.localStorage.getItem('pokemon')
-        }
+        if (loading || !localStorage) { return; }
 
-        // 2. check if the pokemon is in cache
+        let cache = {};
+        if (localStorage.getItem('pokedex')) {
+            cache = JSON.parse(localStorage.getItem('pokemon')); // Note: 'pokemon' not 'pokedex'
+        }
 
         if (selectedPokemon in cache) {
-            // return from cache
-            setData(cache[selectedPokemon])
-            return
-        } else {
+            setData(cache[selectedPokemon]);
+            return;
+        } 
 
+        async function fetchPokemonData() {
+            setLoading(true);
+            try {
+                const baseUrl = 'https://pokeapi.co/api/v2/';
+                const suffix = 'pokemon/' + getPokedexNumber(selectedPokemon);
+                const finalUrl = baseUrl + suffix;
+
+                const res = await fetch(finalUrl);
+                const pokemonData = await res.json();
+                setData(pokemonData);
+
+                cache[selectedPokemon] = pokemonData;
+                localStorage.setItem('pokemon', JSON.stringify(cache));
+
+            } catch (err) {
+                console.log(err.message);
+            } finally {
+                setLoading(false);
+            }
         }
 
-        // if we fetch from the api, save the information to the cache
-    }, [selectedPokemon])
+        fetchPokemonData();
+    }, [selectedPokemon]);
+
+    if (loading) {
+        return <h4>Loading...</h4>;
+    }
+
 
     return (
-        <div>      
-            <TypeCard {...props} />
-            <Modal {...props} />
+        <div className="poke-card">
+            <div>
+                <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
+                <h2>{name}</h2>
+            </div>
+            <div className="type-container">
+                {types && types.map((typeObj, typeIndex) => (
+                    <TypeCard key={typeIndex} type={typeObj?.type?.name} />
+                ))}
+            </div>
+            <img src="{/pokemon/" alt={name + " image"} />
         </div>
-    )
+    );
 }

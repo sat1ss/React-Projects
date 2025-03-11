@@ -1,6 +1,6 @@
-import { Header } from './components/header'
-import { SideNav } from './components/SideNav'
-import { PokeCard } from './components/PokeCard'
+import Header from './components/header'
+import SideNav from './components/SideNav'
+import PokeCard from './components/PokeCard'
 import { useState } from 'react'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header />
-      <SideNav />
+      <SideNav selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon}/>
       <PokeCard selectedPokemon={selectedPokemon} />
     </>
   )
