@@ -1,6 +1,6 @@
 export function Tabs(props) {
   const { todos, setSelectedTab, selectedTab } = props;
-  const tabs = ["Wszystkie", "Otwarte", "Skończone"];
+  const tabs = ["Wszystkie", "Otwarte", "Zrobione"];
 
   return (
     <nav>
