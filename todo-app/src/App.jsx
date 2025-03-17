@@ -8,7 +8,7 @@ function App() {
   const [todos, setTodos] = useState([
     { input: "Witaj! Dodaj swoje pierwsze zadanie!", complete: false },
   ]);
-  const [selectedTab, setSelectedTab] = useState("All");
+  const [selectedTab, setSelectedTab] = useState("Wszystkie");
 
   function handleAddTodo(newTodo) {
     const newTodoList = [...todos, { input: newTodo, complete: false }];
