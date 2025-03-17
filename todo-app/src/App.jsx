@@ -6,7 +6,7 @@ import { TodoList } from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState([
-    { input: "Hello! Add your first todo!", complete: false },
+    { input: "Witaj! Dodaj swoje pierwsze zadanie!", complete: false },
   ]);
   const [selectedTab, setSelectedTab] = useState("All");
 

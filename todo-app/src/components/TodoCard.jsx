@@ -11,14 +11,14 @@ export function TodoCard(props) {
             handleCompleteTodo(todoIndex);
           }}
         >
-          <h6>Done</h6>
+          <h6>Zrobione</h6>
         </button>
         <button
           onClick={() => {
             handleDeleteTodo(todoIndex);
           }}
         >
-          <h6>Delete</h6>
+          <h6>Usuń</h6>
         </button>
       </div>
     </div>

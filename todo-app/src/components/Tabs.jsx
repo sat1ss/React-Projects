@@ -1,16 +1,16 @@
 export function Tabs(props) {
   const { todos, setSelectedTab, selectedTab } = props;
-  const tabs = ["All", "Open", "Completed"];
+  const tabs = ["Wszystkie", "Otwarte", "Skończone"];
 
   return (
     <nav>
       {tabs.map((tab, tabIndex) => {
         const numOfTasks =
-          tab === "All"
+          tab === "Wszystkie"
             ? todos.length
-            : tab === "Open"
-              ? todos.filter((val) => !val.complete).length
-              : todos.filter((val) => val.complete).length;
+            : tab === "Otwarte"
+            ? todos.filter((val) => !val.complete).length
+            : todos.filter((val) => val.complete).length;
 
         return (
           <button

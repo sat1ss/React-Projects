@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { first151Pokemon, getFullPokedexNumber } from '../utils';
+import { useState } from "react";
+import { first151Pokemon, getFullPokedexNumber } from "../utils";
 
 export default function SideNav(props) {
   const {
@@ -9,7 +9,7 @@ export default function SideNav(props) {
     showSideMenu,
   } = props;
 
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const filteredPokemon = first151Pokemon.filter((ele, eleIndex) => {
     if (getFullPokedexNumber(eleIndex).includes(searchValue)) {
@@ -22,12 +22,12 @@ export default function SideNav(props) {
     return false;
   });
   return (
-    <nav className={' ' + (!showSideMenu ? ' open' : '')}>
-      <div className={'header ' + (!showSideMenu ? ' open' : '')}>
+    <nav className={" " + (!showSideMenu ? " open" : "")}>
+      <div className={"header " + (!showSideMenu ? " open" : "")}>
         <button className="open-nav-button" onClick={handleToggleMenu}>
           <i className="fa-solid fa-arrow-left-long"></i>
         </button>
-        <h1 className={'text-gradient'}>Pokedex</h1>
+        <h1 className={"text-gradient"}>Pokedex</h1>
       </div>
 
       <input
@@ -43,10 +43,13 @@ export default function SideNav(props) {
         return (
           <button
             key={pokemonIndex}
-            onClick={() => setSelectedPokemon(truePokedexNumber)}
+            onClick={() => {
+              setSelectedPokemon(truePokedexNumber);
+              handleToggleMenu();
+            }}
             className={
-              'nav-card' +
-              (pokemonIndex === selectedPokemon ? ' nav-card-selected' : ' ')
+              "nav-card" +
+              (pokemonIndex === selectedPokemon ? " nav-card-selected" : " ")
             }
           >
             <p>{getFullPokedexNumber(truePokedexNumber)}</p>
