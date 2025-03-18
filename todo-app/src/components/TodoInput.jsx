@@ -11,6 +11,12 @@ export function TodoInput(props) {
         onChange={(e) => {
           setInputValue(e.target.value);
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && inputValue) {
+            handleAddTodo(inputValue);
+            setInputValue("");
+          }
+        }}
         placeholder="Dodaj zadanie"
       />
 
