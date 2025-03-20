@@ -1,6 +1,6 @@
 export function Header(props) {
   const { todos } = props;
-  const todosLength = todos.length;
+  const todosLength = todos.filter((val) => !val.complete).length;
   const taskOrTasks =
     todosLength === 1
       ? "zadanie"

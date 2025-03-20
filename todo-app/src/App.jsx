@@ -14,7 +14,7 @@ function App() {
     const newTodoList = [...todos, { input: newTodo, complete: false }];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
-    if (selectedTab === "Zrobione") {
+    if (selectedTab === "Ukończone") {
       setSelectedTab("Wszystkie");
     }
   }

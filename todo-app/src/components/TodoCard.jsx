@@ -11,7 +11,7 @@ export function TodoCard(props) {
             handleCompleteTodo(todoIndex);
           }}
         >
-          <h6>Zrobione</h6>
+          <h6>Ukończone</h6>
         </button>
         <button
           onClick={() => {

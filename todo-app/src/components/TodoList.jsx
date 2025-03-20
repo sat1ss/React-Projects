@@ -6,7 +6,7 @@ export function TodoList(props) {
   const filterTodosList =
     selectedTab === "Wszystkie"
       ? todos
-      : selectedTab === "Zrobione"
+      : selectedTab === "Ukończone"
       ? todos.filter((val) => val.complete)
       : todos.filter((val) => !val.complete);
 
